@@ -15,8 +15,7 @@ datasource db {
 }
 
 enum Platform {
-  X
-  LINKEDIN
+  GITHUB
 }
 
 model User {
