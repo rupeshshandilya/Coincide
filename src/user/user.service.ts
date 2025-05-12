@@ -2,11 +2,10 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateUserDto } from './dto/create-user.dto';
 import axios from 'axios';
-import { Platform } from 'generated/prisma';
 
 @Injectable()
 export class UserService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   // Get followers and following from GitHub
   async fetchGitHubData(username: string) {
@@ -41,25 +40,24 @@ export class UserService {
       return await this.prisma.user.upsert({
         where: {
           platform_platformUserId: {
-            platform: Platform.GITHUB,
+            platform: 'GITHUB',
             platformUserId: username,
           },
         },
         create: {
-          platform: Platform.GITHUB,
+          platform: 'GITHUB',
           platformUserId: username,
           username: username,
         },
         update: {
-          username: username, // Update username in case it changed
+          username: username,
         },
       });
     } catch (error) {
-      // If upsert fails, try to find the user
       const existingUser = await this.prisma.user.findUnique({
         where: {
           platform_platformUserId: {
-            platform: Platform.GITHUB,
+            platform: 'GITHUB',
             platformUserId: username,
           },
         },
@@ -102,7 +100,7 @@ export class UserService {
       const existingUser = await this.prisma.user.findUnique({
         where: {
           platform_platformUserId: {
-            platform: Platform.GITHUB,
+            platform: 'GITHUB',
             platformUserId: createUserDto.userId,
           },
         },
@@ -159,7 +157,7 @@ export class UserService {
     const user = await this.prisma.user.findUnique({
       where: {
         platform_platformUserId: {
-          platform: Platform.GITHUB,
+          platform: 'GITHUB',
           platformUserId: userId,
         },
       },

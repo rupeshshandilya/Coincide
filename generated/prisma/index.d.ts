@@ -39,8 +39,7 @@ export type UserTag = $Result.DefaultSelection<Prisma.$UserTagPayload>
  */
 export namespace $Enums {
   export const Platform: {
-  X: 'X',
-  LINKEDIN: 'LINKEDIN'
+  GITHUB: 'GITHUB'
 };
 
 export type Platform = (typeof Platform)[keyof typeof Platform]

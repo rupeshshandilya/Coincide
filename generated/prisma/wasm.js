@@ -157,8 +157,7 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 exports.Platform = exports.$Enums.Platform = {
-  X: 'X',
-  LINKEDIN: 'LINKEDIN'
+  GITHUB: 'GITHUB'
 };
 
 exports.Prisma.ModelName = {
